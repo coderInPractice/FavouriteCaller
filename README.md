@@ -6,4 +6,4 @@ Main activity shows saved seleceted contact. Upon touch it fires CALL Intent.
 
 ## Screenshot
 
-<img
+<img src="/screenshots/ss01.png" width="346" height="615" alt="Home"/>

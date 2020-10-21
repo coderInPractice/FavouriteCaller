@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">GrandMas Caller</string>
+    <string name="app_name">Favourite Caller</string>
     <string name = "action_bar_title">Contact List</string>
     <string name="menu_icon_title">Add</string>
     <string name="contact_text_view">Manish Verma</string>
     <string name="contact_image_view">contact_thumbnail</string>
-    <string name="contact_number_tv">9598104416</string>
+    <string name="contact_number_tv">9999999999</string>
 </resources>

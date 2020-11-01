@@ -7,14 +7,17 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.favouritecaller.Adapters.ContactAdapter;
+import com.example.favouritecaller.Adapters.ContactListAdapter;
 import com.example.favouritecaller.Database.ContactModel;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ import java.util.List;
 public class ContactListActivity extends AppCompatActivity {
 
     RecyclerView contactRecyclerView;
-    ContactAdapter contactAdapter;
+    ContactListAdapter contactAdapter;
 
     List<ContactModel> contactList = new ArrayList<>();
 
@@ -74,8 +77,31 @@ public class ContactListActivity extends AppCompatActivity {
             Toast.makeText(this, "No contacts found :(", Toast.LENGTH_SHORT).show();
         }
 
-        contactAdapter = new ContactAdapter(this, contactList,getApplication());
+        contactAdapter = new ContactListAdapter(contactList,this,getApplication());
         contactRecyclerView.setAdapter(contactAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_search,menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search_menu);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                contactAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
